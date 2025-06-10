@@ -6,6 +6,7 @@ public class Reservation {
     private String prenom;
     private int nombreConvives;
     private String telephone;
+    private String dateReservation;
 
     public Reservation() {
     }
@@ -65,5 +66,9 @@ public class Reservation {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public String getDateReservation() {
+        return dateReservation;
     }
 }
