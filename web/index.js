@@ -37,7 +37,8 @@ async function displayVelibs(map) {
             const address = velibs.data.stations[i].address;
             const capacity = velibs.data.stations[i].capacity;
             const marker = L.marker([lat, lon]).addTo(map);
-            const nbvelibdispo = infostation.data.stations[i].num_bikes_available;
+            let nbvelibdispo = 0;
+            nbvelibdispo = infostation.data.stations[i].num_bikes_available;
             marker.bindPopup(`
                 <strong>${name}</strong><br>
                 Adresse: ${address}<br>
