@@ -1,7 +1,8 @@
 import L from 'leaflet';
 
 const map = initMap();
-displayVelibs(map);
+const boutonLoadVelib = document.getElementById("loadVelib");
+boutonLoadVelib.addEventListener("click",displayVelibs(map));
 
 /**
  * Initialise la carte Leaflet.
