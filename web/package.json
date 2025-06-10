@@ -1,0 +1,20 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "dependencies": {
+    "esbuild": "0.17.18",
+    "handlebars": "^4.7.8",
+    "http-server": "^14.1.1",
+    "leaflet": "^1.9.4"
+  },
+  "scripts": {
+    "build": "esbuild index.js --bundle --sourcemap --target=es2015 --outfile=dist/out.js",
+    "watch": "npm run build -- --watch",
+    "serve": "http-server"
+  }
+}
