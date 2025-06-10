@@ -28,26 +28,29 @@ function initMap() {
  */
 async function displayVelibs(map) {
     const velibs = await fetchVelibs();
-    if(velibs) {
-        velibs.data.stations.forEach((velib) => {
-            const name = velib.name;
-            const lat = velib.lat;
-            const lon = velib.lon;
-            const address = velib.address;
-            const capacity = velib.capacity;
+    const infostation = await fetchStation();
+    if(velibs && infostation) {
+        for(let i = 0;i<velibs.data.stations.length;i++){
+            const name = velibs.data.stations[i].name;
+            const lat = velibs.data.stations[i].lat;
+            const lon = velibs.data.stations[i].lon;
+            const address = velibs.data.stations[i].address;
+            const capacity = velibs.data.stations[i].capacity;
             const marker = L.marker([lat, lon]).addTo(map);
+            const nbvelibdispo = infostation.data.stations[i].num_bikes_available;
             marker.bindPopup(`
-            <strong>${name}</strong><br>
-            Adresse: ${address}<br>
-            Capacité: ${capacity}<br>
-        `);
-        })
+                <strong>${name}</strong><br>
+                Adresse: ${address}<br>
+                Capacité: ${capacity}<br>
+                Nb velibs dispo: ${nbvelibdispo}<br>
+            `);
+        }
     }
 }
 
 /**
  * Récupère les données des velibs depuis l'API.
- * @returns {Promise<any>} Rétourne les données des velibs
+ * @returns {Promise<any>} Retourne les données des velibs
  */
 async function fetchVelibs() {
     try {
@@ -59,4 +62,20 @@ async function fetchVelibs() {
         console.error("Erreur fetch velibs: ", error);
     }
 
+}
+
+/**
+ * Récupère les données des stations depuis l'API
+ * @returns {Promise<any>} Retourne les données des stations
+ */
+
+async function fetchStation(){
+    try{
+        const response = await fetch("https://api.cyclocity.fr/contracts/nancy/gbfs/v2/station_status.json");
+        if(response.ok){
+            return await response.json();
+        }
+    }catch (error){
+        console.log("Erreur fetch stations : ",error);
+    }
 }
