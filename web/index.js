@@ -13,6 +13,12 @@ boutonLoadVelib.addEventListener("click", (e) => {
 const boutonLoadRestos = document.getElementById("loadRestos");
 boutonLoadRestos.addEventListener("click", () => {
     displayRestos(map);
+});
+
+// Handler pour les afficher les evenements
+const boutonLoadEvents = document.getElementById("loadEvenements");
+boutonLoadEvents.addEventListener("click", () => {
+    displayEvents(map);
 })
 
 /**
@@ -28,6 +34,47 @@ function initMap() {
     }).addTo(map);
 
     return map;
+}
+
+/**
+ * Affiche les événements sur la carte.
+ * @param map - La carte Leaflet sur laquelle afficher les événements.
+ * @returns {Promise<void>}
+ */
+async function displayEvents(map) {
+    const events = await fetchEvents();
+    if (events) {
+        events.incidents.forEach((event) => {
+            const type = event.type;
+            const description = event.description;
+            const startTime = new Date(event.starttime).toLocaleDateString('fr-FR');
+            const endtime = new Date(event.endtime).toLocaleDateString('fr-FR');
+            const lat = event.location.polyline.split(' ')[0];
+            const lon = event.location.polyline.split(' ')[1];
+            const marker = L.marker([lat, lon]).addTo(map);
+            marker.bindPopup(`
+                <strong>${type}</strong><br>
+                Description: ${description}<br>
+                Début: ${startTime}<br>
+                Fin: ${endtime}<br>
+            `);
+        })
+    }
+}
+
+/**
+ * Récupère les données des événements depuis l'API.
+ * @returns {Promise<any>} Retourne les données des événements
+ */
+async function fetchEvents() {
+    try {
+        const response = await fetch(`${urls.API_EVENTS_URL}`);
+        if (response.ok) {
+            return await response.json();
+        }
+    } catch (error) {
+        console.error("Erreur fetch events: ", error);
+    }
 }
 
 /**
@@ -63,9 +110,8 @@ async function fetchRestos() {
             return await response.json();
         }
     } catch (error) {
-        console.error("Erreur fetch velibs: ", error);
+        console.error("Erreur fetch restos: ", error);
     }
-
 }
 
 /**

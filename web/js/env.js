@@ -3,7 +3,8 @@ const urls = {
     TILE_LAYER_ATTRIBUTION:"http://www.openstreetmap.org/copyright",
     API_VELIBS_URL:"https://api.cyclocity.fr/contracts/nancy/gbfs/v2/station_information.json",
     API_STATIONS_URL:"https://api.cyclocity.fr/contracts/nancy/gbfs/v2/station_status.json",
-    API_RESTOS_URL:"http://localhost:8000/BD"
+    API_RESTOS_URL:"http://localhost:8000/BD",
+    API_EVENTS_URL:"http://localhost:8000/evenement",
 };
 
 export default urls;
