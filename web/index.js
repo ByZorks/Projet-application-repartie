@@ -44,6 +44,16 @@ function initMap() {
 async function displayEvents(map) {
     const events = await fetchEvents();
     if (events) {
+        const redMarker = L.icon({
+            iconUrl: 'images/marker-icon-2x-rouge.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: 'node_modules/leaflet/dist/images/marker-shadow.png',
+            shadowSize: [41, 41],
+            shadowAnchor: [12, 41]
+        });
+
         events.incidents.forEach((event) => {
             const type = event.type;
             const description = event.description;
@@ -51,7 +61,7 @@ async function displayEvents(map) {
             const endtime = new Date(event.endtime).toLocaleDateString('fr-FR');
             const lat = event.location.polyline.split(' ')[0];
             const lon = event.location.polyline.split(' ')[1];
-            const marker = L.marker([lat, lon]).addTo(map);
+            const marker = L.marker([lat, lon], {icon: redMarker}).addTo(map);
             marker.bindPopup(`
                 <strong>${type}</strong><br>
                 Description: ${description}<br>
@@ -85,12 +95,22 @@ async function fetchEvents() {
 async function displayRestos(map) {
     const restos = await fetchRestos();
     if (restos) {
+        const greenMarker = L.icon({
+            iconUrl: 'images/marker-icon-2x-vert.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: 'node_modules/leaflet/dist/images/marker-shadow.png',
+            shadowSize: [41, 41],
+            shadowAnchor: [12, 41]
+        });
+
         restos.forEach((resto) => {
             const name = resto.nom;
             const address = resto.adresse;
             const lat = resto.latitude;
             const lon = resto.longitude;
-            const marker = L.marker([lat, lon]).addTo(map);
+            const marker = L.marker([lat, lon], {icon: greenMarker}).addTo(map);
             marker.bindPopup(`
                 <strong>${name}</strong><br>
                 Adresse: ${address}<br>
