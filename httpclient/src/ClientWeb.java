@@ -7,10 +7,6 @@ import java.time.Duration;
 
 public class ClientWeb {
 
-    public static void main(String[] args) {
-        System.out.println(new ClientWeb().getIncidents());
-    }
-
     public String getIncidents() {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://carto.g-ny.org/data/cifs/cifs_waze_v2.json"))
