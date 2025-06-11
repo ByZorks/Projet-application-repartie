@@ -27,3 +27,7 @@ RewriteRule ^.*$ /index.html [L]
   Deny from all
 </FilesMatch>
 
+<FilesMatch "out.js">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
