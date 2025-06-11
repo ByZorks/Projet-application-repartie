@@ -48,6 +48,6 @@ public class LancerServeur {
         server.createContext("/evenement", httpServeurHandlerEvent);
         server.setExecutor(null);
         server.start();
-        System.out.println("Serveur HTTP lancé sur http://localhost:8000/BD");
+        System.out.println("Serveur HTTP lancé sur http://localhost:8000/");
     }
 }
