@@ -1,0 +1,18 @@
+import java.rmi.RemoteException;
+
+public class Serveur implements ServiceCentrale {
+
+    ServiceData serviceData;
+    ServiceEvenement serviceEvent;
+
+    @Override
+    public void setServiceBD(ServiceData service) throws RemoteException {
+        serviceData = service;
+        System.out.println("ServiceBD set: " + serviceData);
+    }
+
+    @Override
+    public void setServiceEvent(ServiceEvenement service) throws RemoteException {
+        serviceEvent = service;
+    }
+}

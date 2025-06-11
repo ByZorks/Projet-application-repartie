@@ -1,4 +1,3 @@
-
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -6,34 +5,42 @@ import java.net.InetSocketAddress;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.SQLException;
 
 public class LancerServeur {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+        // Configuration des paramètres
+        int rmiPort = (args.length > 0) ? Integer.parseInt(args[0]) : 1099;
+        String ip = (args.length > 1) ? args[1] : "localhost";
 
-        HttpServeur s = new HttpServeur();
-        ServiceCentrale service = (ServiceCentrale) UnicastRemoteObject.exportObject(s, 0);
-        int port = 1099; // Port par défaut pour RMI
-        if(args.length > 0) {
-            try {
-                port = Integer.parseInt(args[0]);
-            } catch (NumberFormatException e) {
-                System.err.println("Port invalide, utilisation du port par défaut 1099");
-            }
-        }
-        String ip = "localhost"; // Adresse IP par défaut
-        if(args.length > 1) {
-            ip = args[1];
+        // Création du registre RMI
+        try {
+            LocateRegistry.createRegistry(rmiPort);
+            System.out.println("Registre RMI créé sur le port " + rmiPort);
+        } catch (Exception e) {
+            System.out.println("Registre RMI déjà existant");
         }
 
-        // Enregistrement de la centrale dans le registre RMI
-        LocateRegistry.createRegistry(port);
-        Registry reg = LocateRegistry.getRegistry(ip, port);
-        reg.rebind("Centrale", service);
+        // Initialisation de HttpServeur
+        Serveur httpServeur = new Serveur();
+        ServiceCentrale serviceCentrale = (ServiceCentrale) UnicastRemoteObject.exportObject(httpServeur, 0);
+
+        // Enregistrement dans le registre RMI
+        Registry registry = LocateRegistry.getRegistry(ip, rmiPort);
+        registry.rebind("Centrale", serviceCentrale);
+        System.out.println("Service centrale enregistré dans RMI");
+
+        // Initialisation du service BD
+        ServiceBD serviceBD = new ServiceBD();
+        ServiceData serviceBDExporte = (ServiceData) UnicastRemoteObject.exportObject(serviceBD, 0);
+        httpServeur.setServiceBD(serviceBDExporte);
+
+        // Configuration et démarrage du serveur HTTP
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-
-        server.createContext("/BD", s);
-        server.setExecutor(null); // Executor par défaut
+        HttpServerHandlerBD httpServeurHandler = new HttpServerHandlerBD(serviceBDExporte);
+        server.createContext("/BD", httpServeurHandler);
+        server.setExecutor(null);
         server.start();
-        System.out.println("Serveur lancé sur http://localhost:8000/BD");
+        System.out.println("Serveur HTTP lancé sur http://localhost:8000/BD");
     }
 }

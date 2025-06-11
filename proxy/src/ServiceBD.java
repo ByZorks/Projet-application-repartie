@@ -14,6 +14,7 @@ public class ServiceBD implements ServiceData{
         statement = connection.createStatement(
                 ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY
         );
+        System.out.println("ServiceBD initialisé avec succès");
     }
 
     @Override
