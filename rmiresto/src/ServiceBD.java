@@ -3,7 +3,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceBD implements ServiceServeur{
+public class ServiceBD implements ServiceData {
     private Statement statement;
     // Constructeur
     public ServiceBD() throws ClassNotFoundException, SQLException {
@@ -17,7 +17,7 @@ public class ServiceBD implements ServiceServeur{
     }
 
     @Override
-    public List<Restaurant> getRestaurants() throws RemoteException, SQLException {
+    public String getRestaurants() throws RemoteException, SQLException {
         String query = "SELECT * FROM RESTAURANTS";
         ResultSet resultSet = statement.executeQuery(query);
         System.out.println(resultSet);
@@ -32,8 +32,26 @@ public class ServiceBD implements ServiceServeur{
             Restaurant restaurant = new Restaurant(id, nom, adresse, latitude, longitude);
             restaurants.add(restaurant);
         }
-        return restaurants;
+        return toJson(restaurants);
     }
+
+    private String toJson(List<Restaurant> restaurants) {
+        StringBuilder json = new StringBuilder("[");
+        for (int i = 0; i < restaurants.size(); i++) {
+            Restaurant r = restaurants.get(i);
+            json.append("{")
+                    .append("\"id\":").append(r.getId()).append(",")
+                    .append("\"nom\":\"").append(r.getNom()).append("\",")
+                    .append("\"adresse\":\"").append(r.getAdresse()).append("\",")
+                    .append("\"latitude\":").append(r.getLatitude()).append(",")
+                    .append("\"longitude\":").append(r.getLongitude())
+                    .append("}");
+            if (i < restaurants.size() - 1) json.append(",");
+        }
+        json.append("]");
+        return json.toString();
+    }
+
 
     @Override
     public boolean addReservation(Reservation res) throws RemoteException {

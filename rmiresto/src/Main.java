@@ -1,26 +1,30 @@
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException, RemoteException {
-        ServiceServeur service = new ServiceBD();
-        List<Restaurant> restaurants = service.getRestaurants();
+        ServiceData service = new ServiceBD();
 
-
-
-        for (Restaurant restaurant : restaurants) {
-            System.out.println("ID: " + restaurant.getId());
-            System.out.println("Nom: " + restaurant.getNom());
-            System.out.println("Adresse: " + restaurant.getAdresse());
-            System.out.println("Latitude: " + restaurant.getLatitude());
-            System.out.println("Longitude: " + restaurant.getLongitude());
-            System.out.println("-----------------------------");
+        ServiceData serviceBD = (ServiceData) UnicastRemoteObject.exportObject(service, 0);
+        int port = 1099; // Port par défaut pour RMI
+        if(args.length > 0) {
+            try {
+                port = Integer.parseInt(args[0]);
+            } catch (NumberFormatException e) {
+                System.err.println("Port invalide, utilisation du port par défaut 1099");
+            }
+        }
+        String ip = "localhost"; // Adresse IP par défaut
+        if(args.length > 1) {
+            ip = args[1];
         }
 
-
-
-
+        // Enregistrement de la centrale dans le registre RMI
+        LocateRegistry.createRegistry(port);
+        Registry reg = LocateRegistry.getRegistry(ip, port);
+        reg.rebind("BD", serviceBD);
     }
 }
