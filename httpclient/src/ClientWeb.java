@@ -5,7 +5,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-public class ClientWeb {
+public class ClientWeb implements ServiceEvenement {
 
     public String getIncidents() {
         HttpRequest request = HttpRequest.newBuilder()
