@@ -31,6 +31,6 @@ public class ClientWeb implements ServiceEvenement{
             System.out.println("InterruptedException: " + e.getMessage());
         }
 
-        return "";
+        return null;
     }
 }

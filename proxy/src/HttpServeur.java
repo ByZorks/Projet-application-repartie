@@ -2,6 +2,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import java.io.*;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 
 public class HttpServeur implements HttpHandler, ServiceCentrale {
@@ -10,19 +11,33 @@ public class HttpServeur implements HttpHandler, ServiceCentrale {
     ServiceEvenement serviceEvent;
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException {
-        if (!"GET".equalsIgnoreCase(exchange.getRequestMethod())) {
-            exchange.sendResponseHeaders(405, -1);
-            System.out.println("Méthode non autorisée: " + exchange.getRequestMethod());
-            return;
-        }if(!exchange.getRequestURI().getPath().startsWith("/BD")) {
-            exchange.sendResponseHeaders(404, -1);
-            System.out.println("Chemin non trouvé: " + exchange.getRequestURI().getPath());
-            return;
+    public void handle(HttpExchange t) throws IOException {
+        String response = "This is the response";
+        System.out.println(t.getRequestURI().getPath());
+        if(t.getRequestURI().getPath().equals("/BD")) {
+            try {
+                response = serviceData.getRestaurants();
+                System.out.println("ouiiiii");
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }catch (RemoteException e) {
+                System.out.println("RemoteException: " + e.getMessage());
+            }
+        }else if(t.getRequestURI().getPath().equals("/service/event")) {
+            try {
+                response = serviceEvent.getIncidents();
+            } catch (RemoteException e) {
+                System.out.println("RemoteException: " + e.getMessage());
+            }
+        } else {
+            response = "Invalid endpoint";
         }
-        else {
-            System.out.println("Requête reçue: " + exchange.getRequestURI());
-        }
+
+        t.sendResponseHeaders(200, response.length());
+        OutputStream os = t.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+
     }
 
 //Faut un serveur http avec les deux attibuts si dessus

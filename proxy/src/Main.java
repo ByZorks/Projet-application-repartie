@@ -1,4 +1,5 @@
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -24,8 +25,12 @@ public class Main {
         }
 
         // Enregistrement de la centrale dans le registre RMI
-        LocateRegistry.createRegistry(port);
         Registry reg = LocateRegistry.getRegistry(ip, port);
-        reg.rebind("BD", serviceBD);
+        try {
+            ServiceCentrale s = (ServiceCentrale) reg.lookup("Centrale");
+            s.setServiceBD(serviceBD);
+        } catch (NotBoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
