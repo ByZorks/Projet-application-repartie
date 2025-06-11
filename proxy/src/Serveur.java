@@ -8,7 +8,6 @@ public class Serveur implements ServiceCentrale {
     @Override
     public void setServiceBD(ServiceData service) throws RemoteException {
         serviceData = service;
-        System.out.println("ServiceBD set: " + serviceData);
     }
 
     @Override

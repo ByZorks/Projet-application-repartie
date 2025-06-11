@@ -35,10 +35,17 @@ public class LancerServeur {
         ServiceData serviceBDExporte = (ServiceData) UnicastRemoteObject.exportObject(serviceBD, 0);
         httpServeur.setServiceBD(serviceBDExporte);
 
+        // Initialisation du service d'événements
+        ServiceEvenement serviceEvent = new ClientWeb();
+        ServiceEvenement serviceEventExporte = (ServiceEvenement) UnicastRemoteObject.exportObject(serviceEvent, 0);
+        httpServeur.setServiceEvent(serviceEventExporte);
+
         // Configuration et démarrage du serveur HTTP
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
         HttpServerHandlerBD httpServeurHandler = new HttpServerHandlerBD(serviceBDExporte);
         server.createContext("/BD", httpServeurHandler);
+        HttpServerHandlerEvent httpServeurHandlerEvent = new HttpServerHandlerEvent(serviceEventExporte);
+        server.createContext("/evenement", httpServeurHandlerEvent);
         server.setExecutor(null);
         server.start();
         System.out.println("Serveur HTTP lancé sur http://localhost:8000/BD");

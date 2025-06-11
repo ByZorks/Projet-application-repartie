@@ -4,12 +4,12 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class HttpServerHandlerBD implements HttpHandler {
+public class HttpServerHandlerEvent implements HttpHandler {
+    
+    private ServiceEvenement serviceEvent;
 
-    private ServiceData serviceData;
-
-    public HttpServerHandlerBD(ServiceData serviceData) {
-        this.serviceData = serviceData;
+    public HttpServerHandlerEvent(ServiceEvenement serviceEvent) {
+        this.serviceEvent = serviceEvent;
     }
 
     @Override
@@ -17,8 +17,9 @@ public class HttpServerHandlerBD implements HttpHandler {
         httpExchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         String response;
         try {
-            if (serviceData != null) {
-                response = serviceData.getRestaurants();
+            if (serviceEvent != null) {
+                response = serviceEvent.getIncidents();
+                System.out.println("Réponse de l'événement: " + response);
             } else {
                 response = "Service de données non initialisé";
             }
@@ -34,5 +35,6 @@ public class HttpServerHandlerBD implements HttpHandler {
         OutputStream os = httpExchange.getResponseBody();
         os.write(responseBytes);
         os.close();
+
     }
 }
