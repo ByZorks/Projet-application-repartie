@@ -2,5 +2,8 @@
 .idea/
 *.iml
 out/
+
+# Node.js
 /web/node_modules/
 /web/dist/
+.env
