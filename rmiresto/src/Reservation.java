@@ -11,13 +11,14 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(int id, int restaurantId, String nom, String prenom, int nombreConvives, String telephone) {
+    public Reservation(int id, int restaurantId, String nom, String prenom, int nombreConvives, String telephone, String dateReservation) {
         this.id = id;
         this.restaurantId = restaurantId;
         this.nom = nom;
         this.prenom = prenom;
         this.nombreConvives = nombreConvives;
         this.telephone = telephone;
+        this.dateReservation = dateReservation;
     }
 
     public int getId() {
