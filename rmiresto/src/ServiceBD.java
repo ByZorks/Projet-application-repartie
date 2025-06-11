@@ -35,6 +35,29 @@ public class ServiceBD implements ServiceData {
         return toJson(restaurants);
     }
 
+    @Override
+    public String getTables(String date, String heure) throws RemoteException, SQLException {
+        String query = "select * from reservations\n" +
+                "where dateres = to_date('"+date+" "+heure+"','DD/MM/YY HH24:MI')\n" +
+                "FETCH FIRST row only;";
+        ResultSet resultSet = statement.executeQuery(query);
+        System.out.println(resultSet);
+        List<Reservation> reservations = new ArrayList<>();
+        while (resultSet.next()) {
+            int id = resultSet.getInt("ID");
+            int restaurantId = resultSet.getInt("RESTAURANT_ID");
+            String nom = resultSet.getString("NOM");
+            String prenom = resultSet.getString("PRENOM");
+            int nombreConvives =resultSet.getInt("NOMBRE_CONVIVES");
+            String telephone = resultSet.getString("TELEPHONE");
+            String dateReservation = resultSet.getString("DATERES");
+
+            Reservation reservation = new Reservation(id, restaurantId, nom, prenom, nombreConvives, telephone, dateReservation);
+            reservations.add(reservation);
+        }
+        return resToJson(reservations);
+    }
+
     private String toJson(List<Restaurant> restaurants) {
         StringBuilder json = new StringBuilder("[");
         for (int i = 0; i < restaurants.size(); i++) {
@@ -47,6 +70,25 @@ public class ServiceBD implements ServiceData {
                     .append("\"longitude\":").append(r.getLongitude())
                     .append("}");
             if (i < restaurants.size() - 1) json.append(",");
+        }
+        json.append("]");
+        return json.toString();
+    }
+
+    private String resToJson(List<Reservation> reservations) {
+        StringBuilder json = new StringBuilder("[");
+        for (int i = 0; i < reservations.size(); i++) {
+            Reservation r = reservations.get(i);
+            json.append("{")
+                    .append("\"id\":").append(r.getId()).append(",")
+                    .append("\"restaurantId\":\"").append(r.getRestaurantId()).append("\",")
+                    .append("\"nom\":\"").append(r.getNom()).append("\",")
+                    .append("\"prenom\":\"").append(r.getPrenom()).append("\",")
+                    .append("\"nombreConvives\":\"").append(r.getNombreConvives()).append("\",")
+                    .append("\"telephone\":").append(r.getTelephone()).append(",")
+                    .append("\"dateReservation\":").append(r.getDateReservation())
+                    .append("}");
+            if (i < reservations.size() - 1) json.append(",");
         }
         json.append("]");
         return json.toString();
