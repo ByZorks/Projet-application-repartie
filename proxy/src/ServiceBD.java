@@ -1,10 +1,9 @@
-package serviceBD;
 import java.rmi.RemoteException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServiceBD implements ServiceData {
+public class ServiceBD implements ServiceData{
     private Statement statement;
     // Constructeur
     public ServiceBD() throws ClassNotFoundException, SQLException {

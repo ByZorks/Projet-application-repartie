@@ -1,4 +1,3 @@
-package serviceBD;
 
 public class Reservation {
     private int id;

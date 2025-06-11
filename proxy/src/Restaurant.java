@@ -1,4 +1,3 @@
-package serviceBD;
 
 public class Restaurant {
     private int id;

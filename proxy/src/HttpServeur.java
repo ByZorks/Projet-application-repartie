@@ -1,17 +1,13 @@
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import serviceBD.ServiceData;
-
 import java.io.*;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.*;
 
 
 public class HttpServeur implements HttpHandler, ServiceCentrale {
 
     ServiceData serviceData;
-    ServiceEvent serviceEvent;
+    ServiceEvenement serviceEvent;
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -35,12 +31,12 @@ public class HttpServeur implements HttpHandler, ServiceCentrale {
 
     @Override
     public void setServiceBD(ServiceData service) throws RemoteException {
-        this.serviceData = service;
+        serviceData = service;
     }
 
     @Override
-    public void setServiceEvent(ServiceEvent serviceEvent) throws RemoteException {
-        this.serviceEvent = serviceEvent;
+    public void setServiceEvent(ServiceEvenement service) throws RemoteException {
+        serviceEvent = service;
     }
 }
 
