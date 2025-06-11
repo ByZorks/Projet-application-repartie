@@ -1,4 +1,5 @@
 import L from 'leaflet';
+require('dotenv').config();
 
 const map = initMap();
 const boutonLoadVelib = document.getElementById("loadVelib");
@@ -13,9 +14,9 @@ boutonLoadVelib.addEventListener("click",(e)=>{
 function initMap() {
     const map = L.map('map').setView([48.691959, 6.184008], 13);
 
-    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tiles = L.tileLayer(process.env.TILE_LAYER_URL, {
         maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: "&copy; <a href='${process.env.TILE_LAYER_ATTRIBUTION}'>OpenStreetMap</a>"
     }).addTo(map);
 
     return map;
@@ -55,7 +56,7 @@ async function displayVelibs(map) {
  */
 async function fetchVelibs() {
     try {
-        const response = await fetch("https://api.cyclocity.fr/contracts/nancy/gbfs/v2/station_information.json");
+        const response = await fetch(`${procress.env.API_VELIBS_URL}`);
         if (response.ok) {
             return await response.json();
         }
@@ -72,7 +73,7 @@ async function fetchVelibs() {
 
 async function fetchStation(){
     try{
-        const response = await fetch("https://api.cyclocity.fr/contracts/nancy/gbfs/v2/station_status.json");
+        const response = await fetch(`${process.env.API_STATIONS_URL}`);
         if(response.ok){
             return await response.json();
         }
