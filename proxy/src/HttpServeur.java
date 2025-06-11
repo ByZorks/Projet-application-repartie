@@ -1,13 +1,17 @@
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import serviceBD.ServiceData;
 
 import java.io.*;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.*;
 
 
-public class HttpServeur implements HttpHandler, Remote {
+public class HttpServeur implements HttpHandler, ServiceCentrale {
 
+    ServiceData serviceData;
+    ServiceEvent serviceEvent;
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -25,7 +29,19 @@ public class HttpServeur implements HttpHandler, Remote {
         }
     }
 
+//Faut un serveur http avec les deux attibuts si dessus
+//Creer deux classe handler un pour le service de bd et l'autre pour le service event
+//Et quand tu new MyHandler() tu passes le service qu'il faut.
 
+    @Override
+    public void setServiceBD(ServiceData service) throws RemoteException {
+        this.serviceData = service;
+    }
+
+    @Override
+    public void setServiceEvent(ServiceEvent serviceEvent) throws RemoteException {
+        this.serviceEvent = serviceEvent;
+    }
 }
 
 
