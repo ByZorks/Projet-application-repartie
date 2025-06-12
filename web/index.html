@@ -23,16 +23,14 @@
 <div id = "form1">
 <form id="resForm">
     <label for="selectResto">Choisissez votre restaurant</label>
-    <select class="form-select" id="selectResto">
-        <option value="1">Restaurant A</option>
-        <option value="2">Restaurant B</option>
+    <select class="form-select" id="selectResto" required>
     </select>
 
     <label for="dateInput">Date de réservation</label>
-    <input type="date" id="dateInput" class="form-control">
+    <input type="date" id="dateInput" class="form-control" required>
 
     <label for="heureInput">Heure de réservation</label>
-    <input type="time" id="heureInput" class="form-control">
+    <input type="time" id="heureInput" class="form-control" required>
 
     <button type="submit" id="btnsearch">Envoyer</button>
 </form>
@@ -41,13 +39,13 @@
 <div id="form2">
 <form id="reservationForm">
     <label id="nom">Nom</label>
-    <input type="text" class="form-control" id="nomInput" placeholder="Entrez votre nom">
+    <input type="text" class="form-control" id="nomInput" placeholder="Entrez votre nom" required>
     <label id="prenom">Prenom</label>
-    <input type="text" class="form-control" id="prenomInput" placeholder="Entrez votre prénom">
+    <input type="text" class="form-control" id="prenomInput" placeholder="Entrez votre prénom" required>
     <label id="tel">Telephone</label>
-    <input type="tel" class="form-control" id="telInput" placeholder="Entrez votre numéro de téléphone">
+    <input type="tel" class="form-control" id="telInput" placeholder="Entrez votre numéro de téléphone" required>
     <label id="nbPersonnes">Nombre de personnes</label>
-    <input type="number" class="form-control" id="nbPersonnesInput" placeholder="Entrez le nombre de personnes">
+    <input type="number" class="form-control" id="nbPersonnesInput" placeholder="Entrez le nombre de personnes" required>
     <button type="submit" id="btnsave">Submit</button>
 </form>
 </div>

@@ -64,14 +64,12 @@ public class HttpServerHandlerBD implements HttpHandler {
                         String date = json.get("date").getAsString();
                         String heure = json.get("heure").getAsString();
                         try{
-                            String nom = json.get("nom").getAsString();
-                            String prenom = json.get("prenom").getAsString();
-                            String phone = json.get("telephone").getAsString();
+                            String nom = sanitize(json.get("nom").getAsString());
+                            String prenom = sanitize(json.get("prenom").getAsString());
+                            String phone = sanitize(json.get("telephone").getAsString());
                             int idtable = json.get("table").getAsInt();
                             int nbr = json.get("nbPersonnes").getAsInt();
-                            System.out.println(date + " " + heure + ":00");
                             serviceData.addReservation(new Reservation(-1,Integer.parseInt(restoId), nom, prenom, nbr, phone, date + " " + heure + ":00"));
-
                         }catch (Exception e){
                             e.printStackTrace();
                             int table = serviceData.getTables(restoId, date, heure);
@@ -102,5 +100,10 @@ public class HttpServerHandlerBD implements HttpHandler {
         OutputStream os = httpExchange.getResponseBody();
         os.write(responseBytes);
         os.close();
+    }
+
+
+    public static String sanitize(String input) {
+        return input == null ? null : input.replaceAll("[<>\"']", ""); // simple filtre XSS
     }
 }
