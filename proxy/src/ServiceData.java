@@ -10,7 +10,7 @@ public interface ServiceData extends Remote {
 
     // Méthode pour récupérer un restaurant par son ID
     boolean addReservation(Reservation res) throws RemoteException;
-
+    int getTables(String idresto, String date, String heure) throws RemoteException;
 
 
 }

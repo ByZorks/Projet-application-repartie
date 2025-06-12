@@ -57,12 +57,14 @@ public class ServiceBD implements ServiceData{
     @Override
     public boolean addReservation(Reservation res) throws RemoteException {
         try {
-            String query = "INSERT INTO RESERVATIONS (ID, RESTAURANT_ID, DATE_RESERVATION, NOMBRE_PERSONNES) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO RESERVATIONS (RESTAURANT_ID, NOMBRE_CONVIVES, TELEPHONE, DATERES, NOM, PRENOM) VALUES ( ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = statement.getConnection().prepareStatement(query);
-            preparedStatement.setInt(1, res.getId());
-            preparedStatement.setInt(2, res.getRestaurantId());
-            preparedStatement.setDate(3, Date.valueOf(res.getDateReservation()));
-            preparedStatement.setInt(4, res.getNombreConvives());
+            preparedStatement.setInt(1, res.getRestaurantId());
+            preparedStatement.setInt(2, res.getNombreConvives());
+            preparedStatement.setString(3, res.getTelephone());
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(res.getDateReservation()));
+            preparedStatement.setString(5, res.getNom());
+            preparedStatement.setString(6, res.getPrenom());
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -70,4 +72,34 @@ public class ServiceBD implements ServiceData{
             return false;
         }
     }
+
+    public int getTables(String idresto, String date, String heure) throws RemoteException {
+        String query = "SELECT ID FROM TABLES " +
+                "WHERE RESTAURANT_ID = ? " +
+                "AND ID NOT IN (" +
+                "    SELECT TABLE_ID FROM reservations " +
+                "    NATURAL JOIN reservationtables " +
+                "    WHERE dateres = TO_DATE(?, 'DD-MM-YYYY HH24:MI')" +
+                ")";
+
+        try (
+                PreparedStatement preparedStatement = statement.getConnection().prepareStatement(query)
+        ) {
+            preparedStatement.setInt(1, Integer.parseInt(idresto));
+            preparedStatement.setString(2, date + " " + heure);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int id =-1;
+            if(resultSet.next()) {
+                id = resultSet.getInt("ID");
+            }
+            resultSet.close();
+            return id;
+
+        } catch (SQLException e) {
+            return -1;
+        }
+    }
+
+
 }
