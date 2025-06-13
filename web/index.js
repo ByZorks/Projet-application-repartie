@@ -3,9 +3,8 @@ import urls from './js/env.js';
 import {fetchReservation, fetchTables} from "./js/reservation";
 
 const map = initMap();
-// Empêche l’envoi classique
 
-
+// 1ère partie du formulaire
 document.getElementById("btnsearch").addEventListener("click", function(e) {
     e.preventDefault(); // important
     const resto = document.getElementById("selectResto").value;
@@ -20,13 +19,12 @@ document.getElementById("btnsearch").addEventListener("click", function(e) {
                 alert("Réservation effectuée avec succès !");
             } else {
                 console.error("Erreur lors de la recherche de tables");
-
             }
         })
         .catch(err => console.error("Erreur:", err));
 });
 
-
+// 2ème partie du formulaire
 document.getElementById("btnsave").addEventListener("click", function(e) {
     e.preventDefault(); // important
     const nom = document.getElementById("nomInput").value;
@@ -47,9 +45,6 @@ document.getElementById("btnsave").addEventListener("click", function(e) {
         .catch(err => console.error("Erreur:", err));
 });
 
-document.getElementById("form2").classList.add("hidden");
-
-
 // Handler pour afficher velibs
 const boutonLoadVelib = document.getElementById("loadVelib");
 boutonLoadVelib.addEventListener("click", (e) => {
@@ -67,6 +62,8 @@ const boutonLoadEvents = document.getElementById("loadEvenements");
 boutonLoadEvents.addEventListener("click", () => {
     displayEvents(map);
 })
+
+// Ajoute les restaurants dans le select
 const selectResto = document.getElementById("selectResto");
 fetchRestos().then((restos) => {
     if (restos) {

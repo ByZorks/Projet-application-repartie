@@ -5,9 +5,14 @@ let date = "";
 let heure = "";
 let nbP = 0;
 
-
-
-
+/**
+ * Récupère les tables disponibles pour un restaurant à une date et heure données
+ * @param resto Restaurant ID
+ * @param d Date
+ * @param h Heure
+ * @param nb Nombre de personnes
+ * @returns {Promise<boolean>}
+ */
 export async function fetchTables(resto, d, h, nb) {
     const data = {
         restaurantId: resto,
@@ -59,7 +64,13 @@ export async function fetchTables(resto, d, h, nb) {
     }
 }
 
-
+/**
+ * Envoie une réservation pour un restaurant à une date et heure données
+ * @param nn Nom du client
+ * @param p Prénom du client
+ * @param t Téléphone du client
+ * @returns {Promise<boolean>}
+ */
 export async function fetchReservation(nn, p, t) {
     const data = {
         nom: nn,
