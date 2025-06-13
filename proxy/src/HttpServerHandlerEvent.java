@@ -6,10 +6,10 @@ import java.io.OutputStream;
 
 public class HttpServerHandlerEvent implements HttpHandler {
     
-    private ServiceEvenement serviceEvent;
+    private Serveur serveur;
 
-    public HttpServerHandlerEvent(ServiceEvenement serviceEvent) {
-        this.serviceEvent = serviceEvent;
+    public HttpServerHandlerEvent(Serveur serviceEvent) {
+        this.serveur = serviceEvent;
     }
 
     @Override
@@ -17,8 +17,8 @@ public class HttpServerHandlerEvent implements HttpHandler {
         httpExchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         String response;
         try {
-            if (serviceEvent != null) {
-                response = serviceEvent.getIncidents();
+            if (serveur.serviceEvent != null) {
+                response = serveur.serviceEvent.getIncidents();
             } else {
                 response = "{\"error\": \"Erreur lors du chargement des incidents.\"}";
             }

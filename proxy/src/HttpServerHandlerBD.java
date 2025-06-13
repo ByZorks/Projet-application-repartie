@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 public class HttpServerHandlerBD implements HttpHandler {
 
-    private ServiceData serviceData;
+    private Serveur serveur;
 
-    public HttpServerHandlerBD(ServiceData serviceData) {
-        this.serviceData = serviceData;
+    public HttpServerHandlerBD(Serveur serviceData) {
+        this.serveur = serviceData;
     }
 
     @Override
@@ -35,8 +35,8 @@ public class HttpServerHandlerBD implements HttpHandler {
 
         if (httpExchange.getRequestMethod().equalsIgnoreCase("GET")) {
             try {
-                if (serviceData != null) {
-                    response = serviceData.getRestaurants();
+                if (serveur.serviceData != null) {
+                    response = serveur.serviceData.getRestaurants();
                 } else {
                     response = "{\"error\": \"Service de données non initialisé\"}";
                 }
@@ -46,7 +46,7 @@ public class HttpServerHandlerBD implements HttpHandler {
             }
         } else if (httpExchange.getRequestMethod().equalsIgnoreCase("POST")) {
             try {
-                if (serviceData != null) {
+                if (serveur != null) {
                     InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8);
                     BufferedReader br = new BufferedReader(isr);
                     StringBuilder sb = new StringBuilder();
@@ -67,10 +67,10 @@ public class HttpServerHandlerBD implements HttpHandler {
                         String prenom = sanitize(json.get("prenom").getAsString());
                         String phone = sanitize(json.get("telephone").getAsString());
 
-                        serviceData.addReservation(new Reservation(-1, Integer.parseInt(restoId), nom, prenom, nbr, phone, fullDate));
+                        serveur.serviceData.addReservation(new Reservation(-1, Integer.parseInt(restoId), nom, prenom, nbr, phone, fullDate));
                         response = "{\"message\": \"Réservation ajoutée avec succès.\"}";
                     }catch (NullPointerException e){
-                        ArrayList<Integer> tables = serviceData.getTables(Integer.parseInt(restoId), fullDate, nbr);
+                        ArrayList<Integer> tables = serveur.serviceData.getTables(Integer.parseInt(restoId), fullDate, nbr);
                         if(!tables.isEmpty()){
                             response = "{\"message\": \"Le restaurant peut vous accueillir.\"}";
                         }else{
