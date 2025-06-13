@@ -1,22 +1,49 @@
-//import io.github.cdimascio.dotenv.Dotenv;
-//
-//public class lireENV {
-//
-//    Dotenv dotenv;
-//
-//    lireENV(){
-//        dotenv = Dotenv.load();
-//    }
-//
-//    public String getUser(){
-//        return dotenv.get("DB_USER");
-//    }
-//
-//    public String getPassword(){
-//        return dotenv.get("DB_PASSWORD");
-//    }
-//
-//    public String getURL(){
-//        return dotenv.get("DB_URL");
-//    }
-//}
+import java.io.*;
+
+public class lireENV {
+
+    String chemin;
+
+    public lireENV(String s) {
+        chemin = s;
+    }
+
+    public String getUser(){
+            try {
+                BufferedReader br = new BufferedReader(new FileReader(chemin));
+                String line = br.readLine();
+                return line;
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+    }
+
+    public String getPassword(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(chemin));
+            String line = br.readLine();
+            line = br.readLine();
+            return line;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String getURL(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(chemin));
+            String line = br.readLine();
+            line = br.readLine();
+            line = br.readLine();
+            return line;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
