@@ -59,6 +59,7 @@ export async function fetchTables(resto, d, h, nb) {
         }
         return false;
     } catch (error) {
+        alert("Erreur de communication avec le service")
         console.error("Erreur lors de la récupération des tables :", error);
         return false;
     }
@@ -112,6 +113,7 @@ export async function fetchReservation(nn, p, t) {
         }
         return false;
     } catch (error) {
+        alert("Erreur de communication avec le service")
         console.error("Erreur lors de la récupération des tables :", error);
         return false;
     }

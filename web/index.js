@@ -25,10 +25,13 @@ document.getElementById("btnsearch").addEventListener("click", function (e) {
                 document.getElementById("form2").classList.remove("hidden");
                 alert("Réservation effectuée avec succès !");
             } else {
-                console.error("Erreur lors de la recherche de tables");
+                alert("Erreur lors de la recherche de tables");
             }
         })
-        .catch(err => console.error("Erreur:", err));
+        .catch(err => {
+            alert("Erreur de communication avec le service")
+            console.log("Erreur",err);
+        });
 });
 
 // 2ème partie du formulaire
@@ -51,11 +54,14 @@ document.getElementById("btnsave").addEventListener("click", function (e) {
                 document.getElementById("form2").classList.add("hidden");
                 alert("Réservation effectuée avec succès !");
             } else {
-                console.error("Erreur lors de la réservation");
+                alert("Erreur lors de la réservation");
 
             }
         })
-        .catch(err => console.error("Erreur:", err));
+        .catch(err => {
+            alert("Erreur de communication avec le service")
+            console.log("Erreur",err);
+        });
 });
 
 // Handler pour afficher velibs
@@ -151,6 +157,7 @@ async function fetchEvents() {
             return await response.json();
         }
     } catch (error) {
+        alert("Erreur de communication avec le service")
         console.error("Erreur fetch events: ", error);
     }
 }
@@ -199,6 +206,7 @@ async function fetchRestos() {
             return await response.json();
         }
     } catch (error) {
+        alert("Erreur de communication avec le service")
         console.error("Erreur fetch restos: ", error);
     }
 }
@@ -242,6 +250,7 @@ async function fetchVelibs() {
             return await response.json();
         }
     } catch (error) {
+        alert("Erreur de communication avec le service")
         console.error("Erreur fetch velibs: ", error);
     }
 
@@ -258,6 +267,7 @@ async function fetchStation() {
             return await response.json();
         }
     } catch (error) {
+        alert("Erreur de communication avec le service")
         console.log("Erreur fetch stations : ", error);
     }
 }
