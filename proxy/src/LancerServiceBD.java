@@ -8,7 +8,9 @@ import java.sql.SQLException;
 public class LancerServiceBD {
     public static void main(String[] args) {
         try{
-            Registry registry = LocateRegistry.getRegistry(args[0], Integer.parseInt(args[1]));
+            String host = args[0] != null ? args[0] : "localhost";
+            int port = args[1] != null ? Integer.parseInt(args[1]) : 1099;
+            Registry registry = LocateRegistry.getRegistry(host, port);
             ServiceCentrale serveurHttp = (ServiceCentrale) registry.lookup("Centrale");
             ServiceBD serviceBD = new ServiceBD();
             ServiceData serviceData = (ServiceData) UnicastRemoteObject.exportObject(serviceBD, 0);
