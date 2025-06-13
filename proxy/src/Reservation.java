@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Reservation {
+public class Reservation implements Serializable {
     private int id;
     private int restaurantId;
     private String nom;
@@ -7,7 +8,6 @@ public class Reservation {
     private int nombreConvives;
     private String telephone;
     private String dateReservation;
-
     public Reservation() {
     }
 
@@ -18,6 +18,16 @@ public class Reservation {
         this.prenom = prenom;
         this.nombreConvives = nombreConvives;
         this.telephone = telephone;
+    }
+
+    public Reservation(int id, int restaurantId, String nom, String prenom, int nombreConvives, String telephone, String dateReservation) {
+        this.id = id;
+        this.restaurantId = restaurantId;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.nombreConvives = nombreConvives;
+        this.telephone = telephone;
+        this.dateReservation = dateReservation;
     }
 
     public int getId() {

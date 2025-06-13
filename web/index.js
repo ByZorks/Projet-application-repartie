@@ -1,7 +1,54 @@
 import L from 'leaflet';
 import urls from './js/env.js';
+import {fetchReservation, fetchTables} from "./js/reservation";
 
 const map = initMap();
+// Empêche l’envoi classique
+
+
+document.getElementById("btnsearch").addEventListener("click", function(e) {
+    e.preventDefault(); // important
+    const resto = document.getElementById("selectResto").value;
+    const date = document.getElementById("dateInput").value;
+    const heure = document.getElementById("heureInput").value;
+    const nbPersonnes = document.getElementById("nbPersonnesInput").value;
+    fetchTables(resto, date, heure, nbPersonnes)
+        .then(success => {
+            if (success) {
+                document.getElementById("form1").classList.add("hidden");
+                document.getElementById("form2").classList.remove("hidden");
+                alert("Réservation effectuée avec succès !");
+            } else {
+                console.error("Erreur lors de la recherche de tables");
+
+            }
+        })
+        .catch(err => console.error("Erreur:", err));
+});
+
+
+document.getElementById("btnsave").addEventListener("click", function(e) {
+    e.preventDefault(); // important
+    const nom = document.getElementById("nomInput").value;
+    const p = document.getElementById("prenomInput").value;
+    const t = document.getElementById("telInput").value;
+
+    fetchReservation(nom, p, t)
+        .then(success => {
+            if (success) {
+                document.getElementById("form1").classList.remove("hidden");
+                document.getElementById("form2").classList.add("hidden");
+                alert("Réservation effectuée avec succès !");
+            } else {
+                console.error("Erreur lors de la réservation");
+
+            }
+        })
+        .catch(err => console.error("Erreur:", err));
+});
+
+document.getElementById("form2").classList.add("hidden");
+
 
 // Handler pour afficher velibs
 const boutonLoadVelib = document.getElementById("loadVelib");
@@ -20,6 +67,19 @@ const boutonLoadEvents = document.getElementById("loadEvenements");
 boutonLoadEvents.addEventListener("click", () => {
     displayEvents(map);
 })
+const selectResto = document.getElementById("selectResto");
+fetchRestos().then((restos) => {
+    if (restos) {
+        restos.forEach((resto) => {
+            const option = document.createElement("option");
+            option.value = resto.id;
+            option.textContent = resto.nom;
+            selectResto.appendChild(option);
+        });
+    }
+}   ).catch((error) => {
+    console.error("Erreur lors de la récupération des restaurants: ", error);
+});
 
 /**
  * Initialise la carte Leaflet.
@@ -115,6 +175,7 @@ async function displayRestos(map) {
                 <strong>${name}</strong><br>
                 Adresse: ${address}<br>
             `);
+
         })
     }
 }
