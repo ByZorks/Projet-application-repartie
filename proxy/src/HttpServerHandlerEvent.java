@@ -29,7 +29,7 @@ public class HttpServerHandlerEvent implements HttpHandler {
             e.printStackTrace();
             response = "{\"error\": \"Erreur lors du traitement : " + e.getMessage().replace("\"", "'") + "\"}";
         }
-
+        System.out.println("Réponse renvoyer par le handler Event : " + response);
         // Correction de l'encodage pour la réponse
         byte[] responseBytes = response.getBytes("UTF-8");
         httpExchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");

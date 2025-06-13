@@ -11,7 +11,7 @@ public class ClientWeb implements ServiceEvenement {
 
     @Override
     public String getIncidents() {
-        System.out.println("getIncidents");
+        System.out.println("Passage dans la méthode getIncidents");
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://carto.g-ny.org/data/cifs/cifs_waze_v2.json"))
                 .header("User-Agent", "Java HttpClient")
@@ -42,7 +42,6 @@ public class ClientWeb implements ServiceEvenement {
         } catch (Exception e) {
             System.err.println("Exception inattendue : " + e.getMessage());
         }
-
         // Retour fallback JSON vide
         return "{\"error\": \"Impossible de récupérer les incidents\"}";
     }

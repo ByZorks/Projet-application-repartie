@@ -82,6 +82,7 @@ public class HttpServerHandlerBD implements HttpHandler {
         } else {
             response = "{\"error\": \"Méthode HTTP non supportée.\"}";
         }
+        System.out.println("Réponse renvoyer par le handler BD : " + response);
 
         byte[] responseBytes = response.getBytes(StandardCharsets.UTF_8);
         httpExchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");

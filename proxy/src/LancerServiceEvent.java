@@ -19,6 +19,7 @@ public class LancerServiceEvent {
             ClientWeb clientWeb = new ClientWeb();
             ServiceEvenement serviceEvenement = (ServiceEvenement) UnicastRemoteObject.exportObject(clientWeb, 0);
             serveurHttp.setServiceEvent(serviceEvenement);
+            System.out.println("Service enregistrer");
         } catch (RemoteException e) {
             System.out.println("Ce n'est peut etre pas la bonne ip ou le bon port ou alors l'annuaire n'existe pas sur cette ip");;
         } catch (NotBoundException e) {

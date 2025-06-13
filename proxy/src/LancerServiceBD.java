@@ -19,6 +19,7 @@ public class LancerServiceBD {
             ServiceBD serviceBD = new ServiceBD();
             ServiceData serviceData = (ServiceData) UnicastRemoteObject.exportObject(serviceBD, 0);
             serveurHttp.setServiceBD(serviceData);
+            System.out.println("Service enregistrer");
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         } catch (NotBoundException e) {

@@ -20,7 +20,7 @@ public class ServiceBD implements ServiceData {
 
     @Override
     public String getRestaurants() throws RemoteException, SQLException {
-        System.out.println("getRestaurants");
+        System.out.println("Passage dans la fonction pour avoir les réservation");
         String query = "SELECT * FROM RESTAURANTS";
         ResultSet resultSet = statement.executeQuery(query);
         System.out.println(resultSet);
@@ -58,7 +58,7 @@ public class ServiceBD implements ServiceData {
 
     @Override
     public boolean addReservation(Reservation res) throws RemoteException {
-        System.out.println("addReservation");
+        System.out.println("Passage dans la fonction de reservation");
         try {
             ArrayList<Integer> tables = getTables(res.getRestaurantId(), res.getDateReservation(), res.getNombreConvives());
 
@@ -98,11 +98,6 @@ public class ServiceBD implements ServiceData {
                     preparedStatement.executeUpdate();
                 }
             }
-
-
-
-
-
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -122,8 +117,6 @@ public class ServiceBD implements ServiceData {
                 "    WHERE dateres BETWEEN TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') - INTERVAL '1' HOUR " +
                 "                     AND TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS') + INTERVAL '1' HOUR " +
                 ")";
-
-
         try (
                 PreparedStatement preparedStatement = statement.getConnection().prepareStatement(query)
         ) {

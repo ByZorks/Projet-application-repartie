@@ -74,6 +74,6 @@ public class LancerServeur {
         httpsServer.createContext("/evenement", httpServeurHandlerEvent);
         httpsServer.setExecutor(null);
         httpsServer.start();
-        System.out.println("Serveur HTTP lancé sur http://localhost:8000/");
+        System.out.println("Serveur HTTP lancé sur le port 8000");
     }
 }
