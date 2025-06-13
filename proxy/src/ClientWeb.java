@@ -7,7 +7,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
-public class ClientWeb implements ServiceEvenement{
+public class ClientWeb implements ServiceEvenement {
 
     @Override
     public String getIncidents() {
@@ -21,19 +21,29 @@ public class ClientWeb implements ServiceEvenement{
         HttpClient client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
                 .followRedirects(HttpClient.Redirect.NORMAL)
-                .proxy(ProxySelector.of(new InetSocketAddress("www-cache", 3128)))
+ //                .proxy(ProxySelector.of(new InetSocketAddress("www-cache", 3128)))
                 .connectTimeout(Duration.ofSeconds(20))
                 .build();
-        HttpResponse<String> response;
+
         try {
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            return response.body();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            int statusCode = response.statusCode();
+
+            if (statusCode == 200) {
+                return response.body();
+            } else {
+                System.err.println("Erreur HTTP : " + statusCode);
+            }
         } catch (IOException e) {
-            System.out.println("IOException: " + e.getMessage());
+            e.printStackTrace();
         } catch (InterruptedException e) {
-            System.out.println("InterruptedException: " + e.getMessage());
+            System.err.println("InterruptedException : " + e.getMessage());// bonne pratique
+        } catch (Exception e) {
+            System.err.println("Exception inattendue : " + e.getMessage());
         }
 
-        return null;
+        // Retour fallback JSON vide
+        return "{\"error\": \"Impossible de récupérer les incidents\"}";
     }
 }
+

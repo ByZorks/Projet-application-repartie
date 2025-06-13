@@ -20,11 +20,11 @@ public class HttpServerHandlerEvent implements HttpHandler {
             if (serviceEvent != null) {
                 response = serviceEvent.getIncidents();
             } else {
-                response = "Service de données non initialisé";
+                response = "{\"error\": \"Erreur lors du chargement des incidents.\"}";
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response = "Erreur: " + e.getMessage();
+            response = "{\"error\": \"Erreur lors du traitement : " + e.getMessage().replace("\"", "'") + "\"}";
         }
 
         // Correction de l'encodage pour la réponse
