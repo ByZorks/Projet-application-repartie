@@ -30,21 +30,11 @@ public class LancerServeur {
         registry.rebind("Centrale", serviceCentrale);
         System.out.println("Service centrale enregistré dans RMI");
 
-        // Initialisation du service BD
-        ServiceBD serviceBD = new ServiceBD();
-        ServiceData serviceBDExporte = (ServiceData) UnicastRemoteObject.exportObject(serviceBD, 0);
-        httpServeur.setServiceBD(serviceBDExporte);
-
-        // Initialisation du service d'événements
-        ServiceEvenement serviceEvent = new ClientWeb();
-        ServiceEvenement serviceEventExporte = (ServiceEvenement) UnicastRemoteObject.exportObject(serviceEvent, 0);
-        httpServeur.setServiceEvent(serviceEventExporte);
-
         // Configuration et démarrage du serveur HTTP
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-        HttpServerHandlerBD httpServeurHandler = new HttpServerHandlerBD(serviceBDExporte);
+        HttpServerHandlerBD httpServeurHandler = new HttpServerHandlerBD(httpServeur.serviceData);
         server.createContext("/BD", httpServeurHandler);
-        HttpServerHandlerEvent httpServeurHandlerEvent = new HttpServerHandlerEvent(serviceEventExporte);
+        HttpServerHandlerEvent httpServeurHandlerEvent = new HttpServerHandlerEvent(httpServeur.serviceEvent);
         server.createContext("/evenement", httpServeurHandlerEvent);
         server.setExecutor(null);
         server.start();
