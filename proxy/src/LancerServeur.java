@@ -1,14 +1,23 @@
 import com.sun.net.httpserver.HttpServer;
+import com.sun.net.httpserver.HttpsConfigurator;
+import com.sun.net.httpserver.HttpsParameters;
+import com.sun.net.httpserver.HttpsServer;
 
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLEngine;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.security.*;
+import java.security.cert.CertificateException;
 import java.sql.SQLException;
 
 public class LancerServeur {
-    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException, KeyStoreException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, KeyManagementException {
         // Configuration des paramètres
         int rmiPort = (args.length > 0) ? Integer.parseInt(args[0]) : 1099;
         String ip = (args.length > 1) ? args[1] : "localhost";
@@ -30,14 +39,41 @@ public class LancerServeur {
         registry.rebind("Centrale", serviceCentrale);
         System.out.println("Service centrale enregistré dans RMI");
 
-        // Configuration et démarrage du serveur HTTP
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+        // Charger le keystore
+        char[] password = "motdepasse".toCharArray();
+        KeyStore ks = KeyStore.getInstance("JKS");
+        ks.load(new FileInputStream("keystore.jks"), password);
+
+        // Initialiser KeyManagerFactory
+        KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
+        kmf.init(ks, password);
+
+        // Créer SSLContext
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(kmf.getKeyManagers(), null, null);
+
+        // Créer le serveur HTTPS
+        HttpsServer httpsServer = HttpsServer.create(new InetSocketAddress(8000), 0);
+        httpsServer.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
+            public void configure(HttpsParameters params) {
+                try {
+                    SSLContext context = getSSLContext();
+                    SSLEngine engine = context.createSSLEngine();
+                    params.setNeedClientAuth(false);
+                    params.setCipherSuites(engine.getEnabledCipherSuites());
+                    params.setProtocols(engine.getEnabledProtocols());
+                    params.setSSLParameters(context.getDefaultSSLParameters());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         HttpServerHandlerBD httpServeurHandler = new HttpServerHandlerBD(httpServeur);
-        server.createContext("/BD", httpServeurHandler);
+        httpsServer.createContext("/BD", httpServeurHandler);
         HttpServerHandlerEvent httpServeurHandlerEvent = new HttpServerHandlerEvent(httpServeur);
-        server.createContext("/evenement", httpServeurHandlerEvent);
-        server.setExecutor(null);
-        server.start();
+        httpsServer.createContext("/evenement", httpServeurHandlerEvent);
+        httpsServer.setExecutor(null);
+        httpsServer.start();
         System.out.println("Serveur HTTP lancé sur http://localhost:8000/");
     }
 }
