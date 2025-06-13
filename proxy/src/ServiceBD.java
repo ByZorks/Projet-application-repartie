@@ -8,10 +8,10 @@ public class ServiceBD implements ServiceData {
 
     // Constructeur
     public ServiceBD() throws ClassNotFoundException, SQLException {
+        lireENV l = new lireENV("./src/jojo.config");
         // Initialisation ou configuration si nécessaire
         Class.forName("oracle.jdbc.driver.OracleDriver");
-        String url = "jdbc:oracle:thin:@charlemagne.iutnc.univ-lorraine.fr:1521:infodb";
-        Connection connection = DriverManager.getConnection(url, "gros43u", "geoffrey");
+        Connection connection = DriverManager.getConnection(l.getURL(), l.getUser(), l.getPassword());
         statement = connection.createStatement(
                 ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY
         );
