@@ -11,6 +11,13 @@ document.getElementById("btnsearch").addEventListener("click", function (e) {
     const date = document.getElementById("dateInput").value;
     const heure = document.getElementById("heureInput").value;
     const nbPersonnes = document.getElementById("nbPersonnesInput").value;
+
+    // Vérification des champs
+    if (!resto || !date || !heure || !nbPersonnes) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+    }
+
     fetchTables(resto, date, heure, nbPersonnes)
         .then(success => {
             if (success) {
@@ -30,6 +37,12 @@ document.getElementById("btnsave").addEventListener("click", function (e) {
     const nom = document.getElementById("nomInput").value;
     const p = document.getElementById("prenomInput").value;
     const t = document.getElementById("telInput").value;
+
+    // Vérification des champs
+    if (!nom || !p || !t) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+    }
 
     fetchReservation(nom, p, t)
         .then(success => {
