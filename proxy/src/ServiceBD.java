@@ -8,7 +8,7 @@ public class ServiceBD implements ServiceData {
 
     // Constructeur
     public ServiceBD() throws ClassNotFoundException, SQLException {
-        lireENV l = new lireENV("./src/jojo.config");
+        lireENV l = new lireENV("./src/db.config");
         // Initialisation ou configuration si nécessaire
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection connection = DriverManager.getConnection(l.getURL(), l.getUser(), l.getPassword());
