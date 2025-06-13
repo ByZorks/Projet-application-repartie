@@ -14,8 +14,10 @@ public class HttpServerHandlerEvent implements HttpHandler {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
+        httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        httpExchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        httpExchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
         System.out.println("Passer dans le handle Event");
-        httpExchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         String response;
         try {
             if (serveur.serviceEvent != null) {
