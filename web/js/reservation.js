@@ -1,62 +1,31 @@
-import urls from "./env";
+import urls from "./env.js";
 
-let idtable = -1;
 let idresto = -1;
 let date = "";
 let heure = "";
+let nbP = 0;
 
 
 
 
-
-export async function fetchTables(resto, d, h) {
+export async function fetchTables(resto, d, h, nb) {
     const data = {
         restaurantId: resto,
         date: d,
         heure: h,
+        nbPersonnes: nb
     };
 
     idresto = resto;
     date = d;
     heure = h;
+    nbP = nb;
+
+    console.log("fetchTables called with data:", data);
 
     try {
-        const response = await fetch("http://localhost:8000/BD", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        const nombre = await response.text();
-        idtable = Number(nombre);
-        console.log("Nombre reçu :", idtable);
-        if (idtable === -1) {
-            alert("Aucune table disponible pour cette date et heure.");
-            return false;
-        }
-        return true;
-    } catch (error) {
-        console.error("Erreur lors de la récupération des tables: ", error);
-        return false;
-    }
-}
-
-
-export async function fetchReservation(nn, p, t, nb) {
-    const data = {
-        nom: nn,
-        prenom: p,
-        telephone: t,
-        restaurantId: idresto,
-        date: date,
-        heure: heure,
-        nbPersonnes: nb,
-        table : idtable
-    };
-
-    try {
-        const response = await fetch("http://localhost:8000/BD", {
+        console.log(urls.API_RESTOS_URL);
+        const response = await fetch(urls.API_RESTOS_URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -64,14 +33,75 @@ export async function fetchReservation(nn, p, t, nb) {
             body: JSON.stringify(data)
         });
 
-        if (!response.ok) {
-            console.error("Erreur HTTP:", response.status);
+        const text = await response.text();
+
+        console.log("Response text:", text);
+
+        let result;
+        try {
+            result = JSON.parse(text);
+        } catch (parseError) {
+            console.error("Erreur de parsing JSON:", parseError);
             return false;
         }
 
-        return true;
+        if (result.message) {
+            alert(result.message);
+            return true;
+        } else if (result.error) {
+            alert("Erreur : " + result.error);
+            return false;
+        }
+        return false;
     } catch (error) {
-        console.error("Erreur lors de l'envoi de la réservation:", error);
+        console.error("Erreur lors de la récupération des tables :", error);
+        return false;
+    }
+}
+
+
+export async function fetchReservation(nn, p, t) {
+    const data = {
+        nom: nn,
+        prenom: p,
+        telephone: t,
+        restaurantId: idresto,
+        date: date,
+        heure: heure,
+        nbPersonnes: nbP,
+    };
+
+    try {
+        const response = await fetch(urls.API_RESTOS_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const text = await response.text();
+
+        console.log("Response text:", text);
+
+        let result;
+        try {
+            result = JSON.parse(text);
+        } catch (parseError) {
+            console.error("Erreur de parsing JSON:", parseError);
+            return false;
+        }
+
+        if (result.message) {
+            alert(result.message);
+            return true;
+        } else if (result.error) {
+            alert("Erreur : " + result.error);
+            return false;
+        }
+        return false;
+    } catch (error) {
+        console.error("Erreur lors de la récupération des tables :", error);
         return false;
     }
 }

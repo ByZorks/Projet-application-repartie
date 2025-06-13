@@ -3,6 +3,7 @@
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface ServiceData extends Remote {
     // Méthode pour récupérer la liste des restaurants
@@ -10,7 +11,7 @@ public interface ServiceData extends Remote {
 
     // Méthode pour récupérer un restaurant par son ID
     boolean addReservation(Reservation res) throws RemoteException;
-    int getTables(String idresto, String date, String heure) throws RemoteException;
+    public ArrayList<Integer> getTables(int idresto, String date, int nb) throws RemoteException;
 
 
 }

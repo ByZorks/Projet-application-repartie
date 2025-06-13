@@ -8,7 +8,6 @@ public class Reservation implements Serializable {
     private int nombreConvives;
     private String telephone;
     private String dateReservation;
-
     public Reservation() {
     }
 

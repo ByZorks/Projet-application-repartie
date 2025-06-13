@@ -11,14 +11,15 @@ document.getElementById("btnsearch").addEventListener("click", function(e) {
     const resto = document.getElementById("selectResto").value;
     const date = document.getElementById("dateInput").value;
     const heure = document.getElementById("heureInput").value;
-    fetchTables(resto, date, heure)
+    const nbPersonnes = document.getElementById("nbPersonnesInput").value;
+    fetchTables(resto, date, heure, nbPersonnes)
         .then(success => {
             if (success) {
                 document.getElementById("form1").classList.add("hidden");
                 document.getElementById("form2").classList.remove("hidden");
                 alert("Réservation effectuée avec succès !");
             } else {
-                console.error("Erreur lors de la réservation");
+                console.error("Erreur lors de la recherche de tables");
 
             }
         })
@@ -31,8 +32,8 @@ document.getElementById("btnsave").addEventListener("click", function(e) {
     const nom = document.getElementById("nomInput").value;
     const p = document.getElementById("prenomInput").value;
     const t = document.getElementById("telInput").value;
-    const nbPersonnes = document.getElementById("nbPersonnesInput").value;
-    fetchReservation(nom, p, t, nbPersonnes)
+
+    fetchReservation(nom, p, t)
         .then(success => {
             if (success) {
                 document.getElementById("form1").classList.remove("hidden");
