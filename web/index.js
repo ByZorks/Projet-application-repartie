@@ -5,7 +5,7 @@ import {fetchReservation, fetchTables} from "./js/reservation";
 const map = initMap();
 
 // 1ère partie du formulaire
-document.getElementById("btnsearch").addEventListener("click", function(e) {
+document.getElementById("btnsearch").addEventListener("click", function (e) {
     e.preventDefault(); // important
     const resto = document.getElementById("selectResto").value;
     const date = document.getElementById("dateInput").value;
@@ -25,7 +25,7 @@ document.getElementById("btnsearch").addEventListener("click", function(e) {
 });
 
 // 2ème partie du formulaire
-document.getElementById("btnsave").addEventListener("click", function(e) {
+document.getElementById("btnsave").addEventListener("click", function (e) {
     e.preventDefault(); // important
     const nom = document.getElementById("nomInput").value;
     const p = document.getElementById("prenomInput").value;
@@ -74,7 +74,7 @@ fetchRestos().then((restos) => {
             selectResto.appendChild(option);
         });
     }
-}   ).catch((error) => {
+}).catch((error) => {
     console.error("Erreur lors de la récupération des restaurants: ", error);
 });
 

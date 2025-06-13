@@ -14,9 +14,9 @@
 <h1 class="m-4">Carte Nancy</h1>
 <div id="map"></div>
 
-<div  class="btn btn-primary mt-5 mx-3" id ="loadVelib">Charger les stations de vélos sur Nancy</div>
-<div  class="btn btn-primary mt-5 mx-3" id ="loadRestos">Charger les restaurants sur Nancy</div>
-<div  class="btn btn-primary mt-5 mx-3" id ="loadEvenements">Charger les évenements sur Nancy</div>
+<div class="btn btn-primary mt-5 mx-3" id="loadVelib">Charger les stations de vélos sur Nancy</div>
+<div class="btn btn-primary mt-5 mx-3" id="loadRestos">Charger les restaurants sur Nancy</div>
+<div class="btn btn-primary mt-5 mx-3" id="loadEvenements">Charger les évenements sur Nancy</div>
 
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -24,35 +24,36 @@
         crossorigin=""></script>
 <script src='./dist/out.js' defer></script>
 
-<div id = "form1">
-<form id="resForm">
-    <label for="selectResto">Choisissez votre restaurant</label>
-    <select class="form-select" id="selectResto" required>
-    </select>
+<div id="form1">
+    <form id="resForm">
+        <label for="selectResto">Choisissez votre restaurant</label>
+        <select class="form-select" id="selectResto" required>
+        </select>
 
-    <label for="dateInput">Date de réservation</label>
-    <input type="date" id="dateInput" class="form-control" required>
+        <label for="dateInput">Date de réservation</label>
+        <input type="date" id="dateInput" class="form-control" required>
 
-    <label for="heureInput">Heure de réservation</label>
-    <input type="time" id="heureInput" class="form-control" required>
+        <label for="heureInput">Heure de réservation</label>
+        <input type="time" id="heureInput" class="form-control" required>
 
-    <label id="nbPersonnes">Nombre de personnes</label>
-    <input type="number" class="form-control" id="nbPersonnesInput" placeholder="Entrez le nombre de personnes" required>
+        <label id="nbPersonnes">Nombre de personnes</label>
+        <input type="number" class="form-control" id="nbPersonnesInput" placeholder="Entrez le nombre de personnes"
+               required>
 
-    <button type="submit" id="btnsearch">Envoyer</button>
-</form>
+        <button type="submit" id="btnsearch">Envoyer</button>
+    </form>
 </div>
 
 <div id="form2" class="hidden">
-<form id="reservationForm">
-    <label id="nom">Nom</label>
-    <input type="text" class="form-control" id="nomInput" placeholder="Entrez votre nom" required>
-    <label id="prenom">Prenom</label>
-    <input type="text" class="form-control" id="prenomInput" placeholder="Entrez votre prénom" required>
-    <label id="tel">Telephone</label>
-    <input type="tel" class="form-control" id="telInput" placeholder="Entrez votre numéro de téléphone" required>
-    <button type="submit" id="btnsave">Submit</button>
-</form>
+    <form id="reservationForm">
+        <label id="nom">Nom</label>
+        <input type="text" class="form-control" id="nomInput" placeholder="Entrez votre nom" required>
+        <label id="prenom">Prenom</label>
+        <input type="text" class="form-control" id="prenomInput" placeholder="Entrez votre prénom" required>
+        <label id="tel">Telephone</label>
+        <input type="tel" class="form-control" id="telInput" placeholder="Entrez votre numéro de téléphone" required>
+        <button type="submit" id="btnsave">Submit</button>
+    </form>
 </div>
 </body>
 </html>
