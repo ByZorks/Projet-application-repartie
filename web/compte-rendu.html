@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compte rendu</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+<body class="container">
+    <div class="mt-2 text-center">
+        <h1>Compte-rendu</h1>
+        <a href="https://github.com/ByZorks/Projet-application-repartie">Dépôt git</a>
+    </div>
+
+    <p>Cette SAE avait pour but de récupérer différentes données à l’aide de plusieurs services :</p>
+
+    <ul class="list-group">
+        <li class="list-group-item bg-light">Un service web</li>
+        <li class="list-group-item bg-light">Un service de base de données</li>
+        <li class="list-group-item bg-light">Un autre service web qu'on ne peut pas interroger directement en JavaScript</li>
+    </ul>
+
+    <div class="mt-2 container">
+        <h2>Service Web</h2>
+        <p>Voici le lien du service web :</p>
+        <a href="https://api.cyclocity.fr/contracts/nancy/gbfs/gbfs.json">https://api.cyclocity.fr/contracts/nancy/gbfs/gbfs.json</a>
+        <p>Ce service web renvoie des données sur les stations de vélibs de la ville de Nancy.</p>
+        <p>Pour récupérer ces données, nous utilisons la méthode <code>fetch</code> de JavaScript et, à partir des données, nous créons des marqueurs de couleur bleue sur la carte Leaflet.</p>
+        <p>Nous avons pris la décision d’ajouter un bouton permettant de charger ces marqueurs afin d’éviter de surcharger la carte avec les autres données.</p>
+        <p>Dans ce cas, c’est donc le JavaScript du site lui-même qui récupère les données.</p>
+    </div>
+
+    <div class="mt-2 container">
+        <h2>Service de base de données</h2>
+        <p>Pour ce service, nous avons dû créer une base de données, dont voici le schéma :</p>
+        <img src="./images/BD.png" alt="Schéma base de données">
+        <p>Pour récupérer les données de cette base, nous avons créé un service BD en Java.</p>
+        <p>Ce service permet de consulter les restaurants de la table, mais aussi de réaliser une réservation.</p>
+        <p>Il implémente également la bibliothèque RMI et propose une méthode permettant de s’enregistrer sur un service central, qui sera utile par la suite.</p>
+    </div>
+
+    <div class="mt-2 container">
+        <h2>Service Web sans JavaScript</h2>
+        <p>Voici le lien de ce service :</p>
+        <a href="https://carto.g-ny.org/data/cifs/cifs_waze_v2.json">https://carto.g-ny.org/data/cifs/cifs_waze_v2.json</a>
+        <p>Ce service contient des données d’événements tels que des chantiers ou autres perturbations pouvant affecter la circulation à Nancy.</p>
+        <p>Comme nous l’avons précisé plus tôt, il est impossible de récupérer ces données via JavaScript.</p>
+        <strong>Pourquoi ?</strong><br>
+        <img src="./images/image.png" alt="Erreur CORS">
+        <p>Comme vous pouvez le voir sur cette image, lorsque nous essayons de récupérer les données depuis notre site, une erreur CORS apparaît.</p>
+        <p>Cette erreur est en réalité une mesure de sécurité pour les utilisateurs. Elle empêche les domaines extérieurs à ce service de récupérer les données via un navigateur.</p>
+        <p>Cette sécurité évite qu’un autre domaine réalise des actions à l’aide des variables de session du navigateur.</p>
+        <p>Un exemple simple :</p>
+        <p>Une personne s’authentifie sur le site de sa banque et utilise un service sans la sécurité CORS. Ce service pourrait alors effectuer des actions sur le compte bancaire de l’utilisateur grâce aux variables de session (notamment celle d’authentification).</p>
+        <p>Pour contourner cette sécurité, nous passons donc par Java, qui n’utilise pas de navigateur et n’est donc pas soumis à cette restriction.</p>
+        <p>Nous avons créé un service « serviceEvenement » qui récupère les données de ce service, et permet également, comme le serviceBD, de s’enregistrer auprès d’un service central.</p>
+    </div>
+
+    <div class="mt-2 container">
+        <h2>Proxy</h2>
+        <p>Enfin, pour assurer la communication entre le serviceBD, le service qui récupère les événements et le site web, nous avons utilisé la classe <code>HttpServer</code> de Java.</p>
+        <p>Cette classe permet de créer un serveur HTTP en local et d’associer des routes afin de pouvoir effectuer des requêtes <code>fetch</code> depuis notre site web.</p>
+        <p>En associant RMI au serveur HTTP, qui sert de service central aux deux autres services, nous pouvons récupérer à la fois les données de la base de données et celles bloquées par le service web.</p>
+    </div>
+
+    <div class="mt-2 container">
+        <h2>Pour finir, voici le schéma complet de tout ce que nous venons d’expliquer</h2>
+        <img src="" alt="Schéma global">
+        <p>Comme je l’ai dit précédemment, le serveur HTTP sert de service central pour les services de base de données et d’événements. Les échanges entre les différents services se font par des objets Java.</p>
+        <p>Ensuite, le site web interroge le serveur HTTP via les différentes routes disponibles. Le serveur utilise alors les services nécessaires pour récupérer les données et les renvoie au format JSON, afin qu’elles puissent être utilisées en JavaScript.</p>
+    </div>
+    <div class="mt-2 container">
+        <h2>Pour utiliser correctement l'ensemble des codes sources</h2>
+    </div>
+</body>
+</html>
