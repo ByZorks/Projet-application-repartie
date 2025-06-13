@@ -32,9 +32,9 @@ public class LancerServeur {
 
         // Configuration et démarrage du serveur HTTP
         HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
-        HttpServerHandlerBD httpServeurHandler = new HttpServerHandlerBD(httpServeur.serviceData);
+        HttpServerHandlerBD httpServeurHandler = new HttpServerHandlerBD(httpServeur);
         server.createContext("/BD", httpServeurHandler);
-        HttpServerHandlerEvent httpServeurHandlerEvent = new HttpServerHandlerEvent(httpServeur.serviceEvent);
+        HttpServerHandlerEvent httpServeurHandlerEvent = new HttpServerHandlerEvent(httpServeur);
         server.createContext("/evenement", httpServeurHandlerEvent);
         server.setExecutor(null);
         server.start();
