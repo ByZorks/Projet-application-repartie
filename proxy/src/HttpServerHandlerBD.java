@@ -23,15 +23,9 @@ public class HttpServerHandlerBD implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+        httpExchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        httpExchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
         String response = "";
-
-        // Répondre aux requêtes OPTIONS (pré-vol CORS)
-        if (httpExchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
-            httpExchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            httpExchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
-            httpExchange.sendResponseHeaders(204, -1); // No Content
-            return;
-        }
 
         if (httpExchange.getRequestMethod().equalsIgnoreCase("GET")) {
             try {
