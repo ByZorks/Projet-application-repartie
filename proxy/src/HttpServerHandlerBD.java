@@ -22,6 +22,7 @@ public class HttpServerHandlerBD implements HttpHandler {
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
+        System.out.println("Passer dans le handle BD");
         httpExchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
         String response = "";
 

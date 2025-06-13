@@ -20,6 +20,7 @@ public class ServiceBD implements ServiceData {
 
     @Override
     public String getRestaurants() throws RemoteException, SQLException {
+        System.out.println("getRestaurants");
         String query = "SELECT * FROM RESTAURANTS";
         ResultSet resultSet = statement.executeQuery(query);
         System.out.println(resultSet);
@@ -57,6 +58,7 @@ public class ServiceBD implements ServiceData {
 
     @Override
     public boolean addReservation(Reservation res) throws RemoteException {
+        System.out.println("addReservation");
         try {
             ArrayList<Integer> tables = getTables(res.getRestaurantId(), res.getDateReservation(), res.getNombreConvives());
 

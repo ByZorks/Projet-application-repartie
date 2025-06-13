@@ -11,6 +11,7 @@ public class ClientWeb implements ServiceEvenement {
 
     @Override
     public String getIncidents() {
+        System.out.println("getIncidents");
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://carto.g-ny.org/data/cifs/cifs_waze_v2.json"))
                 .header("User-Agent", "Java HttpClient")
