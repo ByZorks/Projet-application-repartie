@@ -8,11 +8,37 @@ CREATE TABLE Restaurants (
 );
 
 -- Insertion des données dans la table Restaurants
-INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Bistrot', '12 Rue des Jardins, Nancy', 48.6921, 6.1844);
-INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Table Gourmande', '45 Avenue de la République, Nancy', 48.6953, 6.1812);
-INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Petit Bistro', '78 Rue Saint-Dizier, Nancy', 48.6887, 6.1856);
-INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Chez Marie', '33 Rue Saint-Michel, Nancy', 48.6876, 6.1821);
-INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Gourmet', '56 Rue Saint-Jean, Nancy', 48.6901, 6.1834);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Petit Bistro', '123 Rue de Paris', 48.8566, 2.3522);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Chez Jean', '456 Avenue des Champs', 48.8639, 2.3333);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Belle Vue', '789 Boulevard de la Mer', 43.6119, 3.8772);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Gourmet', '321 Rue de la Gare', 45.7640, 4.8357);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Trattoria', '654 Rue des Alpes', 48.8333, 2.3333);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Café Parisien', '987 Rue de la République', 48.8584, 2.2945);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Bonne Cuisine', '135 Rue des Jardins', 48.8467, 2.3956);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Bistrot Gourmand', '246 Rue de la Montagne', 48.8519, 2.3498);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Table d''Hôte', '357 Rue des Fleurs', 48.8501, 2.3401);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Comptoir', '468 Rue de la Plage', 43.5833, 3.9000);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Terrasse', '579 Rue du Soleil', 48.8589, 2.3456);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Jardin Secret', '680 Rue des Bois', 48.8386, 2.3599);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Maison Blanche', '791 Rue de la Rivière', 48.8512, 2.3489);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Relais', '802 Rue du Pont', 48.8561, 2.3512);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Ferme', '913 Rue de la Forêt', 48.8432, 2.3378);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Château', '12 Rue du Château', 48.8611, 2.3389);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Cabane', '23 Rue de la Cabane', 48.8555, 2.3444);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Moulin', '34 Rue du Moulin', 48.8478, 2.3567);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Tour', '45 Rue de la Tour', 48.8523, 2.3421);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Pont', '56 Rue du Pont', 48.8576, 2.3534);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Plage', '67 Rue de la Plage', 43.5856, 3.9023);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Port', '78 Rue du Port', 48.8590, 2.3467);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Montagne', '89 Rue de la Montagne', 48.8456, 2.3578);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Lac', '90 Rue du Lac', 48.8543, 2.3412);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Forêt', '101 Rue de la Forêt', 48.8489, 2.3501);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Soleil', '112 Rue du Soleil', 48.8534, 2.3456);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Lune', '123 Rue de la Lune', 48.8567, 2.3432);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Les Étoiles', '134 Rue des Étoiles', 48.8490, 2.3512);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('Le Ciel', '145 Rue du Ciel', 48.8501, 2.3498);
+INSERT INTO Restaurants (nom, adresse, latitude, longitude) VALUES ('La Terre', '156 Rue de la Terre', 48.8523, 2.3476);
+
 
 -- Création de la table Reservations
 CREATE TABLE Reservations (
@@ -27,12 +53,36 @@ CREATE TABLE Reservations (
 );
 
 -- Insertion des données dans la table Reservations
-INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, date_reservation) VALUES (1, 'Dupont', 'Jean', 4, '0612345678', TO_DATE('2025-06-10', 'YYYY-MM-DD'));
-INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, date_reservation) VALUES (2, 'Martin', 'Sophie', 2, '0712345678', TO_DATE('2025-06-11', 'YYYY-MM-DD'));
-INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, date_reservation) VALUES (3, 'Bernard', 'Luc', 6, '0687654321', TO_DATE('2025-06-12', 'YYYY-MM-DD'));
-INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, date_reservation) VALUES (4, 'Petit', 'Emma', 3, '0798765432', TO_DATE('2025-06-13', 'YYYY-MM-DD'));
-INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, date_reservation) VALUES (5, 'Moreau', 'Pierre', 5, '0654321876', TO_DATE('2025-06-14', 'YYYY-MM-DD'));
-
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (1, 'Dupont', 'Jean', 4, '0123456789', TO_DATE('2023-12-01', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (2, 'Martin', 'Marie', 2, '0987654321', TO_DATE('2023-12-02', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (3, 'Bernard', 'Luc', 6, '0112233445', TO_DATE('2023-12-03', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (4, 'Dubois', 'Sophie', 4, '0223344556', TO_DATE('2023-12-04', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (5, 'Morel', 'Pierre', 3, '0334455667', TO_DATE('2023-12-05', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (6, 'Leroy', 'Anne', 5, '0445566778', TO_DATE('2023-12-06', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (7, 'Simon', 'Claire', 2, '0556677889', TO_DATE('2023-12-07', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (8, 'Michel', 'Paul', 4, '0667788990', TO_DATE('2023-12-08', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (9, 'Lefevre', 'Camille', 6, '0778899001', TO_DATE('2023-12-09', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (10, 'Garnier', 'Hugo', 3, '0889900112', TO_DATE('2023-12-10', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (11, 'Faure', 'Emma', 5, '0990011223', TO_DATE('2023-12-11', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (12, 'Rousseau', 'Louis', 2, '0101122334', TO_DATE('2023-12-12', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (13, 'Moreau', 'Chloé', 4, '0212233445', TO_DATE('2023-12-13', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (14, 'Girard', 'Nicolas', 6, '0323344556', TO_DATE('2023-12-14', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (15, 'Clement', 'Julie', 3, '0434455667', TO_DATE('2023-12-15', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (16, 'Pelletier', 'Thomas', 5, '0545566778', TO_DATE('2023-12-16', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (17, 'Lemoine', 'Léa', 2, '0656677889', TO_DATE('2023-12-17', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (18, 'Lambert', 'Antoine', 4, '0767788990', TO_DATE('2023-12-18', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (19, 'Renaud', 'Manon', 6, '0878899001', TO_DATE('2023-12-19', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (20, 'Vasseur', 'Alexandre', 3, '0989900112', TO_DATE('2023-12-20', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (21, 'Bonnet', 'Juliette', 5, '0190011223', TO_DATE('2023-12-21', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (22, 'Perrot', 'Mathieu', 2, '0201122334', TO_DATE('2023-12-22', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (23, 'Humbert', 'Célia', 4, '0312233445', TO_DATE('2023-12-23', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (24, 'Dumont', 'Romain', 6, '0423344556', TO_DATE('2023-12-24', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (25, 'Brunet', 'Jeanne', 3, '0534455667', TO_DATE('2023-12-25', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (26, 'Blanchard', 'Gabriel', 5, '0645566778', TO_DATE('2023-12-26', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (27, 'Martinez', 'Louise', 2, '0756677889', TO_DATE('2023-12-27', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (28, 'Gauthier', 'Théo', 4, '0867788990', TO_DATE('2023-12-28', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (29, 'Dufour', 'Élodie', 6, '0978899001', TO_DATE('2023-12-29', 'YYYY-MM-DD'));
+INSERT INTO Reservations (restaurant_id, nom, prenom, nombre_convives, telephone, dateres) VALUES (30, 'Denis', 'Maxime', 3, '0189900112', TO_DATE('2023-12-30', 'YYYY-MM-DD'));
 
 -- Création de la table Tables
 CREATE TABLE Tables (
@@ -48,12 +98,36 @@ INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (1, 1, 4);
 INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (1, 2, 6);
 INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (2, 1, 2);
 INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (2, 2, 4);
-INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (3, 1, 4);
-INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (3, 2, 8);
-INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (4, 1, 2);
-INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (4, 2, 4);
-INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (5, 1, 4);
-INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (5, 2, 6);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (3, 1, 8);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (4, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (5, 1, 6);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (5, 2, 2);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (6, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (7, 1, 6);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (8, 1, 2);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (9, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (10, 1, 8);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (11, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (12, 1, 6);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (13, 1, 2);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (14, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (15, 1, 6);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (16, 1, 8);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (17, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (18, 1, 6);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (19, 1, 2);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (20, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (21, 1, 6);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (22, 1, 8);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (23, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (24, 1, 6);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (25, 1, 2);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (26, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (27, 1, 6);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (28, 1, 8);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (29, 1, 4);
+INSERT INTO Tables (restaurant_id, numero_table, capacite) VALUES (30, 1, 6);
+
 
 -- Création de la table de liaison ReservationTables
 CREATE TABLE ReservationTables (
@@ -66,7 +140,32 @@ CREATE TABLE ReservationTables (
 
 -- Insertion des données dans la table ReservationTables
 INSERT INTO ReservationTables (reservation_id, table_id) VALUES (1, 1);
-INSERT INTO ReservationTables (reservation_id, table_id) VALUES (2, 3);
-INSERT INTO ReservationTables (reservation_id, table_id) VALUES (3, 5);
-INSERT INTO ReservationTables (reservation_id, table_id) VALUES (4, 7);
-INSERT INTO ReservationTables (reservation_id, table_id) VALUES (5, 9);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (2, 2);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (3, 3);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (4, 4);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (5, 5);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (6, 6);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (7, 7);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (8, 8);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (9, 9);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (10, 10);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (11, 11);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (12, 12);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (13, 13);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (14, 14);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (15, 15);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (16, 16);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (17, 17);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (18, 18);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (19, 19);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (20, 20);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (21, 21);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (22, 22);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (23, 23);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (24, 24);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (25, 25);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (26, 26);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (27, 27);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (28, 28);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (29, 29);
+INSERT INTO ReservationTables (reservation_id, table_id) VALUES (30, 30);

@@ -19,7 +19,6 @@ public class HttpServerHandlerEvent implements HttpHandler {
         try {
             if (serviceEvent != null) {
                 response = serviceEvent.getIncidents();
-                System.out.println("Réponse de l'événement: " + response);
             } else {
                 response = "Service de données non initialisé";
             }

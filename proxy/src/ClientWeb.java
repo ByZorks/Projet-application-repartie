@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.ProxySelector;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -19,6 +21,7 @@ public class ClientWeb implements ServiceEvenement{
         HttpClient client = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_1_1)
                 .followRedirects(HttpClient.Redirect.NORMAL)
+                .proxy(ProxySelector.of(new InetSocketAddress("www-cache", 3128)))
                 .connectTimeout(Duration.ofSeconds(20))
                 .build();
         HttpResponse<String> response;
