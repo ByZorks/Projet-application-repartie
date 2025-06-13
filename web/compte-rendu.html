@@ -68,8 +68,22 @@
         <p>Comme je l’ai dit précédemment, le serveur HTTP sert de service central pour les services de base de données et d’événements. Les échanges entre les différents services se font par des objets Java.</p>
         <p>Ensuite, le site web interroge le serveur HTTP via les différentes routes disponibles. Le serveur utilise alors les services nécessaires pour récupérer les données et les renvoie au format JSON, afin qu’elles puissent être utilisées en JavaScript.</p>
     </div>
+
     <div class="mt-2 container">
         <h2>Pour utiliser correctement l'ensemble des codes sources</h2>
+
+        <h3>Partie site web</h3>
+        <p>Pour la partie site web, il faut, en prérequis, disposer de la commande <code>npm</code> et exécuter un <code>npm install</code> dans le dossier <code>web</code> du projet afin d’installer toutes les dépendances nécessaires.</p>
+        <p>Ensuite, il faut créer un fichier <code>env.js</code> dans un dossier <code>js</code> avec la structure suivante :</p>
+        <img src="./images/img.png" alt="Exemple env.js">
+        <p>Les deux derniers liens correspondent aux liens du serveur HTTP que vous devrez lancer (ici en <code>localhost</code>, sinon mettez l’IP de la machine). Vous pouvez changer les ports ainsi que le nom des routes au moment du lancement du serveur.</p>
+        <p>Ensuite, il faut utiliser la commande <code>npm run build</code> (toujours dans le dossier <code>web</code>) pour exécuter le script de build défini dans le <code>package.json</code>.</p>
+        <p>Deux options sont alors possibles :</p>
+        <ul class="list-group">
+            <li class="list-group-item">Utiliser le serveur défini dans le <code>package.json</code> avec la commande <code>npm run serve</code></li>
+            <li class="list-group-item">Déployer le dossier <code>web</code> sur un serveur tel que <code>webetu</code></li>
+        </ul>
+        <p>Sans lancer le serveur HTTP, vous n’aurez accès qu’au premier bouton concernant les stations de vélibs.</p>
     </div>
 </body>
 </html>
