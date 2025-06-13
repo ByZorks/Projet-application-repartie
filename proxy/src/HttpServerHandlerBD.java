@@ -35,7 +35,7 @@ public class HttpServerHandlerBD implements HttpHandler {
 
         if (httpExchange.getRequestMethod().equalsIgnoreCase("GET")) {
             try {
-                if (serveur != null) {
+                if (serveur.serviceData != null) {
                     response = serveur.serviceData.getRestaurants();
                 } else {
                     response = "{\"error\": \"Service de données non initialisé\"}";

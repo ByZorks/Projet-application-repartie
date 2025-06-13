@@ -17,7 +17,7 @@ public class HttpServerHandlerEvent implements HttpHandler {
         httpExchange.getResponseHeaders().set("Access-Control-Allow-Origin", "*");
         String response;
         try {
-            if (serveur != null) {
+            if (serveur.serviceEvent != null) {
                 response = serveur.serviceEvent.getIncidents();
             } else {
                 response = "{\"error\": \"Erreur lors du chargement des incidents.\"}";
