@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +36,7 @@
         <label for="heureInput">Heure de réservation</label>
         <input type="time" id="heureInput" class="form-control" required>
 
-        <label id="nbPersonnes">Nombre de personnes</label>
+        <label for="nbPersonnesInput" id="nbPersonnes">Nombre de personnes</label>
         <input type="number" class="form-control" id="nbPersonnesInput" placeholder="Entrez le nombre de personnes"
                required>
 
@@ -46,11 +46,11 @@
 
 <div id="form2" class="hidden">
     <form id="reservationForm">
-        <label id="nom">Nom</label>
+        <label for="nomInput" id="nom">Nom</label>
         <input type="text" class="form-control" id="nomInput" placeholder="Entrez votre nom" required>
-        <label id="prenom">Prenom</label>
+        <label for="prenomInput" id="prenom">Prenom</label>
         <input type="text" class="form-control" id="prenomInput" placeholder="Entrez votre prénom" required>
-        <label id="tel">Telephone</label>
+        <label for="telInput" id="tel">Telephone</label>
         <input type="tel" class="form-control" id="telInput" placeholder="Entrez votre numéro de téléphone" required>
         <button type="submit" id="btnsave">Submit</button>
     </form>

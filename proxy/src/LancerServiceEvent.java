@@ -8,8 +8,12 @@ import java.sql.SQLException;
 public class LancerServiceEvent {
     public static void main(String[] args) {
         try{
-            String host = args[0] != null ? args[0] : "localhost";
-            int port = args[1] != null ? Integer.parseInt(args[1]) : 1099;
+            int port = 1099;
+            String host = "localhost";
+            if(args.length == 2){
+                host = args[0] != null ? args[0] : "localhost";
+                port = args[1] != null ? Integer.parseInt(args[1]) : 1099;
+            }
             Registry registry = LocateRegistry.getRegistry(host, port);
             ServiceCentrale serveurHttp = (ServiceCentrale) registry.lookup("Centrale");
             ClientWeb clientWeb = new ClientWeb();

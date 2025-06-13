@@ -47,7 +47,7 @@ document.getElementById("btnsave").addEventListener("click", function (e) {
 
 // Handler pour afficher velibs
 const boutonLoadVelib = document.getElementById("loadVelib");
-boutonLoadVelib.addEventListener("click", (e) => {
+boutonLoadVelib.addEventListener("click", () => {
     displayVelibs(map)
 });
 
@@ -84,12 +84,10 @@ fetchRestos().then((restos) => {
  */
 function initMap() {
     const map = L.map('map').setView([48.691959, 6.184008], 13);
-
-    const tiles = L.tileLayer(urls.TILE_LAYER_URL, {
+    L.tileLayer(urls.TILE_LAYER_URL, {
         maxZoom: 19,
-        attribution: "&copy; <a href='${urls.TILE_LAYER_ATTRIBUTION}'>OpenStreetMap</a>"
+        attribution: `&copy; <a href='${urls.TILE_LAYER_ATTRIBUTION}'>OpenStreetMap</a>̀`
     }).addTo(map);
-
     return map;
 }
 
@@ -240,7 +238,6 @@ async function fetchVelibs() {
  * Récupère les données des stations depuis l'API
  * @returns {Promise<any>} Retourne les données des stations
  */
-
 async function fetchStation() {
     try {
         const response = await fetch(`${urls.API_STATIONS_URL}`);
