@@ -4,7 +4,23 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.*;
 
+/**
+ * La classe Main est le point d'entrée de l'application.
+ * Elle initialise un service de base de données et le rend accessible via RMI (Remote Method Invocation).
+ * Cela permet à d'autres applications de se connecter et d'utiliser les services de la base de données à distance.
+ */
 public class Main {
+
+    /**
+    * Méthode principale qui initialise et enregistre le service de base de données via RMI.
+    *
+    * @param args les arguments de la ligne de commande.
+    *             args[0] peut spécifier le port sur lequel le registre RMI sera créé.
+    *             args[1] peut spécifier l'adresse IP du registre RMI.
+    * @throws SQLException si une erreur de base de données se produit.
+    * @throws ClassNotFoundException si la classe du pilote JDBC n'est pas trouvée.
+    * @throws RemoteException si une erreur RMI se produit.
+    */
     public static void main(String[] args) throws SQLException, ClassNotFoundException, RemoteException {
         ServiceData service = new ServiceBD();
 
