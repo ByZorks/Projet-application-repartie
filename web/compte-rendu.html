@@ -109,6 +109,20 @@
         <li class="list-group-item">Déployer le dossier <code>web</code> sur un serveur tel que <code>webetu</code></li>
     </ul>
     <p>Sans lancer le serveur HTTP, vous n’aurez accès qu’au premier bouton concernant les stations de vélibs.</p>
+    <br>
+    <h3>Partie serveur back-end</h3>
+    <p>Pour la partie back-end, if faut avoir java 21 afin de pouvoir lancer les différents scripts. Il faudra aussi
+        mettre creer un fichier <code>config</code> dans <code>/src/src/</code> avec la structure suivante:</p>
+    <img src="./images/config.png" alt="Exemple config">
+    <p>L'URL correspond au lieu utilisé pour accéder à la base de données afin de récupérer et modifier les données
+        présentes</p>
+    <p>Il faut tout d'abord compiler les fichiers Java avec la commande <code>javac -cp ".:lib/*" *.java</code>.
+        Ensuite, il faut lancer le script avec la commande<code>java LancerServeur</code> qui se trouve dans le dossier
+        <code>/src</code>. On peut ensuite lancer les deux services utilisé par le serveur afin d'afficher les données
+        du site avec ces deux commandes <code>java LancerServiceBD</code> et <code>java LancerServiceEvent</code>.</p>
+
+    <p>Le fait de ne pas lancer le de ne aps lancer les services va empêcher au site de récupérer les données relatives
+    aux restaurants et aux accidents. Il sera aussi impossible de réserver un repas.</p>
 </div>
 </body>
 </html>
