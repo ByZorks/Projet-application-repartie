@@ -119,9 +119,10 @@
     <p>Il faut tout d'abord compiler les fichiers Java avec la commande <code>javac -cp ".:lib/*" *.java</code>.
         Ensuite, il faut lancer le script avec la commande<code>java LancerServeur</code> qui se trouve dans le dossier
         <code>/src</code>. On peut ensuite lancer les deux services utilisé par le serveur afin d'afficher les données
-        du site avec ces deux commandes <code>java LancerServiceBD</code> et <code>java LancerServiceEvent</code>.</p>
+        du site avec ces deux commandes <code>java LancerServiceBD ip_serviceCentral portannuaire</code> et <code>java LancerServiceEvent ip_serviceCentral portannuaire</code>.
+        Ici l'ip par default est <code>localhost</code> et le port est <code>1099</code></p>        
 
-    <p>Le fait de ne pas lancer le de ne aps lancer les services va empêcher au site de récupérer les données relatives
+    <p>Le fait de ne pas lancer les services va empêcher au site de récupérer les données relatives
     aux restaurants et aux accidents. Il sera aussi impossible de réserver un repas.</p>
 </div>
 </body>
