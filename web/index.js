@@ -94,6 +94,7 @@ fetchRestos().then((restos) => {
         });
     }
 }).catch((error) => {
+    alert("Erreur de communication avec le service de BD")
     console.error("Erreur lors de la récupération des restaurants: ", error);
 });
 
